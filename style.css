@@ -36,5 +36,26 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     height: 250px;
-    width: 500px;
+    width: 750px;
+}
+
+#numOfCreators, #numOfLinks{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    margin-left: 20px;
+    visibility: hidden;
+}
+
+#numOfLinks{
+    margin-top: 50px;
+}
+
+#creditLabel{
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200%;
+    text-decoration: none;
 }

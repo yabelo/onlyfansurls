@@ -22,6 +22,8 @@ const textFileRef = ref(storage, 'URLs.txt');
 const loadingContentText = document.querySelector('h1[id="loadingContentText"]');
 const selectName = document.querySelector('select[id="selectName"]');
 const linksBox = document.querySelector('textarea[id="linksBox"]');
+const numOfCreators = document.querySelector('h2[id="numOfCreators"]');
+const numOfLinks = document.querySelector('h2[id="numOfLinks"]');
 var namesLinks = new Map();
 var names = [];
 
@@ -53,7 +55,7 @@ getDownloadURL(textFileRef)
         namesLinks.get(currentName).push(str);
       }
     }
-    
+
     names.forEach((name) => {
       const option = document.createElement('option');
       option.value = name;
@@ -63,17 +65,28 @@ getDownloadURL(textFileRef)
 
     loadingContentText.style.visibility = 'hidden';
     selectName.style.visibility = 'visible';
-    
+    numOfCreators.style.visibility = 'visible';
+    numOfLinks.style.visibility = 'visible';
+
+    let num = 0;
+    names.forEach(element => {
+      num += namesLinks.get(element).length;
+    });
+
+    numOfCreators.innerHTML = "Number of creators: " + names.length;
+    numOfLinks.innerHTML = "Number of links: " + num;
   })
   .catch((error) => {
     console.error('Error:', error);
   });
 
-  selectName.addEventListener('change', (event) => {
-    const selectedName = event.target.value;
-    const selectedLinks = namesLinks.get(selectedName);
+selectName.addEventListener('change', (event) => {
+  const selectedName = event.target.value;
+  const selectedLinks = namesLinks.get(selectedName);
 
-    linksBox.value = selectedLinks.join('\n');
-    linksBox.style.visibility = 'visible';
-  });
+  linksBox.value = selectedLinks.join('\n');
+  linksBox.style.visibility = 'visible';
+});
+
+
 
